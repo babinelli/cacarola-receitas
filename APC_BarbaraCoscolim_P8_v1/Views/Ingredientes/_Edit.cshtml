@@ -1,0 +1,35 @@
+﻿@model APC_BarbaraCoscolim_P8_v1.Models.Ingrediente
+
+@{
+    int i = ViewBag.i == null ? 0 : ViewBag.i;
+}
+
+
+    @if (i == 0)
+    {
+        <tr>
+            <th>Ingrediente</th>
+            <th>Quantidade</th>
+            <th>Unidade de medida</th>
+        </tr>
+    }
+
+    <tr>
+        <td>
+            @Html.TextBoxFor(model => model.Nome, null, new { @Name = "[" + i + "].Nome", @class= "form-control" })
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.Quantidade, null, new { @Name = "[" + i + "].Quantidade", @class = "form-control" })
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.UnidadeMedidaID, (SelectList)ViewBag.UnidadeMedidaID, new { @Name = "[" + i + "].UnidadeMedidaID", @class = "form-control" })
+        </td>
+        <td>
+            @Html.ActionLink("Deletar", "Delete", new { ingredienteId = Model.IngredienteID, receitaId = ViewBag.ReceitaID })
+        </td>
+    </tr>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

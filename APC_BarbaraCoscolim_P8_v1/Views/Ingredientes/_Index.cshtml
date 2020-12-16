@@ -1,0 +1,32 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.Ingrediente>
+
+@{
+    ViewBag.Title = "Ingrediente";
+}
+
+<table class="table">
+    <tr>
+        <th>Ingrediente</th>
+        <th>Quantidade</th>
+        <th>Unidade de medida</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnidadeMedida.Unidade)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

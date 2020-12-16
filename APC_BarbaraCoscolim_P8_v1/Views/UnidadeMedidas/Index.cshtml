@@ -1,0 +1,39 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.UnidadeMedida>
+
+@{
+    ViewBag.Title = "Unidade de medida";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Unidades de medida - Lista</h2>
+
+<p>
+    @Html.ActionLink("Criar nova unidade de medida", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Unidade)
+        </th>
+        <th>
+            @Html.Label("Descrição")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.UnidadeMedidaID }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.UnidadeMedidaID })
+        </td>
+    </tr>
+}
+
+</table>

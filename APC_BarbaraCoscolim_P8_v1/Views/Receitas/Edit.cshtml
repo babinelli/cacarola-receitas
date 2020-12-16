@@ -1,0 +1,123 @@
+﻿@model APC_BarbaraCoscolim_P8_v1.Models.Receita
+
+@{
+    ViewBag.Title = "Receita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Receita - Editar</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ReceitaID, new { id = "receitaId" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeReceita, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NomeReceita, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NomeReceita, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoriaID, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoriaID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoriaID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DificuldadeID, "Dificuldade", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("DificuldadeID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DificuldadeID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @* Partial view ingredientes *@
+
+    <div id="divPartialViewIngredienteEdit" class="form-group">
+        <table id="tablePartialViewIngrediente">
+            @{
+                var i = 0;
+            }
+            @foreach (var item in Model.ListaIngredientes)
+            {
+                RouteValueDictionary dictionary = new RouteValueDictionary();
+
+                dictionary.Add("i", i);
+                dictionary.Add("idIngrediente", item.IngredienteID);
+
+                Html.RenderAction("_Edit", "Ingredientes", dictionary);
+                i++;
+            }
+            @Html.Hidden("i", i, new { id = "i" })
+        </table>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Adicionar novo ingrediente" id="buttonAddEdit" class="btn btn-default"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ModoPreparo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.ModoPreparo, new { htmlAttributes = new { @class = "form-control text-area" } })
+            @Html.ValidationMessageFor(model => model.ModoPreparo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TempoPreparo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TempoPreparo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TempoPreparo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Salvar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#buttonAddEdit").click(function () {
+            var i = document.getElementById("i").value;
+            $.ajax({
+                url: '/Ingredientes/_Edit',
+                data: {
+                    i: i,
+                    ingredienteId: null,
+                    receitaId: document.getElementById("receitaId").value
+                },
+                success: function (data) {
+                    $("#tablePartialViewIngrediente").find('tbody').append(data);
+                }
+            })
+            i++;
+            $('#i').val(i);
+        })
+    </script>
+}

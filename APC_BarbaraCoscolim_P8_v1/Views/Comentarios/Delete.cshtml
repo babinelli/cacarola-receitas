@@ -1,0 +1,47 @@
+﻿@model APC_BarbaraCoscolim_P8_v1.Models.Comentario
+
+@{
+    ViewBag.Title = "Comentário";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Comentários - Deletar</h2>
+
+<h3>Tem certeza que deseja deletar comentário?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Receita.NomeReceita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Receita.NomeReceita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TextoComentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TextoComentario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" />
+        </div>
+    }
+</div>

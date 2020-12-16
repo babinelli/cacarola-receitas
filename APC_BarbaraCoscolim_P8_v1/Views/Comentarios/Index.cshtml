@@ -1,0 +1,66 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.Comentario>
+
+@{
+    ViewBag.Title = "Comentário";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Comentários - Lista</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Comentario ID
+        </th>
+        <th>
+            Receita ID
+        </th>
+        <th>
+            Comentado por
+        </th>
+        <th>
+            Comentário
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ComentarioID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReceitaID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TextoComentario)
+    </td>
+    @if (User.Identity.Name == item.UserID)
+    {
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { idReceita = item.ReceitaID, idComentario = item.ComentarioID })
+        </td>
+        <td>
+            @Html.ActionLink("Deletar", "Delete", new { idReceita = item.ReceitaID, idComentario = item.ComentarioID })
+        </td>
+    }
+    else if (User.IsInRole("Admin"))
+    {
+        <td></td>
+        <td>
+            @Html.ActionLink("Deletar", "Delete", new { idReceita = item.ReceitaID, idComentario = item.ComentarioID })
+        </td>
+    }
+    else
+    {
+        <td></td>
+        <td></td>
+    }
+</tr>
+    }
+
+</table>

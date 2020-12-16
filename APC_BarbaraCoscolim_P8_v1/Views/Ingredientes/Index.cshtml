@@ -1,0 +1,50 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.Ingrediente>
+
+@{
+    ViewBag.Title = "Ingrediente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ingredientes - Lista</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IngredienteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceitaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnidadeMedida.Unidade)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngredienteID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceitaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnidadeMedida.Unidade)
+            </td>
+        </tr>
+    }
+
+</table>

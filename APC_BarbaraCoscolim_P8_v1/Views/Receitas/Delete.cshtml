@@ -1,0 +1,71 @@
+﻿@model APC_BarbaraCoscolim_P8_v1.Models.Receita
+
+@{
+    ViewBag.Title = "Receita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Receita - Deletar</h2>
+
+<h3>Tem certeza de que deseja deletar essa receita?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.NomeCategoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.NomeCategoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dificuldade.NomeDificuldade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dificuldade.NomeDificuldade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeReceita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeReceita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModoPreparo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModoPreparo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempoPreparo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempoPreparo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" />
+        </div>
+    }
+</div>

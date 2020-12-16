@@ -1,0 +1,86 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.Receita>
+
+@{
+    ViewBag.Title = "Receita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Receitas - Lista</h2>
+
+<p>
+    @Html.ActionLink("Criar nova receita", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria.NomeCategoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dificuldade.NomeDificuldade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeReceita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModoPreparo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TempoPreparo)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Categoria.NomeCategoria)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Dificuldade.NomeDificuldade)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NomeReceita)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ModoPreparo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TempoPreparo)
+    </td>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.ReceitaID })
+        </td>
+        <td>
+            @Html.ActionLink("Detalhes", "Details", new { id = item.ReceitaID })
+        </td>
+        <td>
+            @Html.ActionLink("Deletar", "Delete", new { id = item.ReceitaID })
+        </td>
+    }
+    else if (User.Identity.Name == item.UserID && !(User.IsInRole("Admin")))
+    {
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.ReceitaID })
+        </td>
+        <td>
+            @Html.ActionLink("Detalhes", "Details", new { id = item.ReceitaID })
+        </td>
+    }
+    else
+    {
+        <td></td>
+        <td>
+            @Html.ActionLink("Detalhes", "Details", new { id = item.ReceitaID })
+        </td>
+        <td></td>
+    }
+
+</tr>
+}
+
+</table>

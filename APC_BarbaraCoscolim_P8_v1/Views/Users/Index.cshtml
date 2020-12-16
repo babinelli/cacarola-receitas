@@ -1,0 +1,47 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Utilizador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Utilizadores - Lista</h2>
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Criar novo utilizador", "Register", "Account")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.Label("E-mail")
+        </th>
+        <th>
+            @Html.Label("Username")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+

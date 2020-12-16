@@ -1,0 +1,92 @@
+﻿@model APC_BarbaraCoscolim_P8_v1.Models.Receita
+
+@{
+    ViewBag.Title = "Receita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Receita</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal details">
+
+        <dd>
+            <table>
+                <tr>
+                    @if (ViewBag.Classificacao == 0)
+                    {
+                        <td>Seja o primeiro a avaliar esta receita!</td>
+                    }
+                    else
+                    {
+                        for (int i = 0; i < ViewBag.Classificacao; i++)
+                        {
+                            <td>
+                                <img src="~/Content/Star.jpg" width="25px" height="25px" />
+                            </td>
+                        }
+                    }
+                </tr>
+            </table>
+        </dd>
+
+        <dd>
+            @Html.Partial("~/Views/Classificacoes/_Create.cshtml", Model.Classificacoes, new ViewDataDictionary { { "ReceitaID", Model.ReceitaID } })
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.NomeCategoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.NomeCategoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dificuldade.NomeDificuldade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dificuldade.NomeDificuldade)
+        </dd>
+
+        <dd>
+            @Html.Partial("~/Views/Ingredientes/_Index.cshtml", Model.ListaIngredientes, new ViewDataDictionary { { "ReceitaID", Model.ReceitaID } })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModoPreparo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModoPreparo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempoPreparo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempoPreparo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+    </dl>
+
+    <dl>
+        @Html.Partial("~/Views/Comentarios/_Index.cshtml", Model.Comentarios, new ViewDataDictionary { { "ReceitaID", Model.ReceitaID } })
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ReceitaID }) |
+    @Html.ActionLink("Voltar à lista", "Index")
+</p>

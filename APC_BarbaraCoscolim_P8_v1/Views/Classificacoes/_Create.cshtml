@@ -1,0 +1,9 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.Classificacao>
+
+@{
+    ViewBag.Title = "Classificação";
+}
+
+@* Crio um link para a view create *@
+@Html.ActionLink("Avaliar receita", "Create", "Classificacoes", new { id = ViewData["ReceitaID"] }, htmlAttributes: new { @class = "" })
+

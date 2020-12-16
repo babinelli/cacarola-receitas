@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Grupo de trabalho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Grupos de trabalho - Lista</h2>
+
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Criar novo grupo de trabalho", "Create")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Grupo de trabalho")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td></td>
+        </tr>
+    }
+
+</table>
+

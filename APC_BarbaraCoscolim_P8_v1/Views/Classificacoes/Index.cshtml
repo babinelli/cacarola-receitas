@@ -1,0 +1,59 @@
+﻿@model IEnumerable<APC_BarbaraCoscolim_P8_v1.Models.Classificacao>
+
+@{
+    ViewBag.Title = "Classificação";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Classificações - Lista</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassificacaoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Receita.NomeReceita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Receita.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NotaClassificacao)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ClassificacaoID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Receita.NomeReceita)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NotaClassificacao)
+    </td>
+
+    @if (User.Identity.Name == item.UserID)
+    {
+        <td></td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { idReceita = item.ReceitaID, idClassificacao = item.ClassificacaoID })
+        </td>
+    }
+    else
+    {
+        <td></td>
+        <td></td>
+    }
+</tr>
+    }
+
+</table>

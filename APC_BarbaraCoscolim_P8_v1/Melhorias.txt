@@ -1,0 +1,12 @@
+﻿MÓDULO INGREDIENTES
+- Gerar corretamente a tabela de ingrediente, com as FK corretas
+- Deletar os ingredientes ao excluir a receita (ON CASCADE DELETE)
+
+MÓDULO RECEITAS
+- No index, deixar filtrar as receitas que o utilizador deseja ver
+- Adicionar imagem às receitas
+
+MÓDULO UTILIZADOR
+- Não permitir que o utilizador escolha seu role ao se registar
+- Implementar no link "Gerir tabelas" a opção de gerir os roles de cada user
+- Implementar edição e deleção de roles
